@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/core/theme/my_theme.dart';
 import 'package:todo_app/home/home_screen.dart';
 
 void main() {
@@ -14,8 +15,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: HomeScreen.routeName,
       routes: {
-        HomeScreen.routeName: (context) => const HomeScreen(),
+        HomeScreen.routeName: (context) => HomeScreen(),
       },
+      theme: MyTheme.lightMode,
     );
   }
 }
