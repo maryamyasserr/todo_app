@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:todo_app/core/network_layer/firestore_utils.dart';
 import 'package:todo_app/core/theme/my_theme.dart';
+import 'package:todo_app/model/task_model.dart';
 
 class TaskWidget extends StatelessWidget {
-  const TaskWidget({super.key});
+  final TaskModel taskModel;
+
+  const TaskWidget({super.key, required this.taskModel});
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       decoration: BoxDecoration(
@@ -21,7 +26,9 @@ class TaskWidget extends StatelessWidget {
             children: [
               SlidableAction(
                 flex: 2,
-                onPressed: (context) {},
+                onPressed: (context) async {
+                  await FireStoreUtils.deleteDataFromFireStore(taskModel);
+                },
                 borderRadius: BorderRadius.circular(15.0),
                 backgroundColor: MyTheme.redColor,
                 foregroundColor: Colors.white,
@@ -42,7 +49,7 @@ class TaskWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                width: 6,
+                width: 8,
                 height: 80,
                 decoration: BoxDecoration(
                     color: theme.primaryColor,
@@ -53,11 +60,11 @@ class TaskWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    'Play basket ball',
+                    taskModel.title,
                     style: theme.textTheme.bodyLarge,
                   ),
                   Text(
-                    'go to the club with friends !',
+                    taskModel.description,
                     style: theme.textTheme.bodyMedium,
                   ),
                   Row(
