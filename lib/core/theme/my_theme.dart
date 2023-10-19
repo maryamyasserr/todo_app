@@ -32,7 +32,7 @@ class MyTheme {
       ),
       scaffoldBackgroundColor: backgroundColorLight,
       appBarTheme: AppBarTheme(
-          iconTheme: IconThemeData(color: Colors.black),
+          iconTheme: IconThemeData(color: Colors.white),
           backgroundColor: primaryLight,
           elevation: 0,
           toolbarHeight: 100,
@@ -52,7 +52,7 @@ class MyTheme {
           bodyLarge: GoogleFonts.poppins(
               color: primaryLight, fontSize: 18, fontWeight: FontWeight.bold),
           bodyMedium: GoogleFonts.roboto(
-              color: blackColor, fontSize: 15, fontWeight: FontWeight.bold),
+              color: blackColor, fontSize: 15, fontWeight: FontWeight.w500),
           titleSmall: GoogleFonts.roboto(
               color: Colors.white,
               fontSize: 12,
