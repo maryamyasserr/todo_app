@@ -12,24 +12,19 @@ class MyTheme {
 
   static Color backgroundColorDark = const Color(0xff060E1E);
   static Color primaryDark = const Color(0xff141922);
-
-  static Color primaryDarkMode = Color(0xff141A2E);
-  static Color secondaryDarkMode = Color(0xffFACC1D);
-  static Color selectedColor = Color(0xff242424);
-  static Color selectedDarkColor = Color(0xffFACC1D);
-  static Color unselectedColor = Color(0xffFFFFFF);
+  static Color selectedDarkColor = Color(0xff5D9CEC);
+  static Color unselectedColor = Color(0xffC8C9CB);
 
   static bool isDark = true;
 
   static ThemeData lightMode = ThemeData(
       primaryColor: primaryLight,
       colorScheme: ColorScheme.fromSeed(
-        seedColor: primaryLight,
-        primary: primaryLight,
-        onSecondary: selectedColor,
-        onPrimary: primaryLight,
-        onBackground: const Color(0xffF8F8F8),
-      ),
+          seedColor: primaryLight,
+          primary: primaryLight,
+          onPrimary: whiteColor,
+          onBackground: backgroundColorLight,
+          onSecondary: blackColor),
       scaffoldBackgroundColor: backgroundColorLight,
       appBarTheme: AppBarTheme(
           iconTheme: IconThemeData(color: Colors.white),
@@ -49,43 +44,51 @@ class MyTheme {
       textTheme: TextTheme(
           titleLarge: GoogleFonts.poppins(
               color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+          titleMedium: GoogleFonts.poppins(
+              color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold),
           bodyLarge: GoogleFonts.poppins(
               color: primaryLight, fontSize: 18, fontWeight: FontWeight.bold),
           bodyMedium: GoogleFonts.roboto(
-              color: blackColor, fontSize: 15, fontWeight: FontWeight.w500),
+              color: blackColor, fontSize: 18, fontWeight: FontWeight.w500),
           titleSmall: GoogleFonts.roboto(
-              color: Colors.white,
+              color: Colors.black,
               fontSize: 12,
               fontWeight: FontWeight.normal)),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: primaryLight,
       ));
   static ThemeData darkMode = ThemeData(
-    primaryColor: primaryDarkMode,
+    primaryColor: backgroundColorDark,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: primaryDarkMode,
-      primary: primaryDarkMode,
-      onSecondary: secondaryDarkMode,
-      onPrimary: secondaryDarkMode,
-      onBackground: primaryDarkMode,
+      seedColor: primaryLight,
+      primary: primaryLight,
+      onSecondary: whiteColor,
+      onPrimary: primaryDark,
+      onBackground: backgroundColorDark,
     ),
-    scaffoldBackgroundColor: Colors.transparent,
+    scaffoldBackgroundColor: backgroundColorDark,
     appBarTheme: AppBarTheme(
-        iconTheme: IconThemeData(color: Colors.white),
-        backgroundColor: Colors.transparent,
+        iconTheme: IconThemeData(color: Colors.black),
+        backgroundColor: primaryLight,
         elevation: 0,
-        centerTitle: true),
-    dividerColor: secondaryDarkMode,
+        toolbarHeight: 100,
+        titleTextStyle: GoogleFonts.poppins(
+            color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+        centerTitle: false),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
         selectedItemColor: selectedDarkColor,
         unselectedItemColor: unselectedColor,
-        backgroundColor: primaryDarkMode),
+        backgroundColor: primaryDark),
     textTheme: TextTheme(
-        titleLarge: GoogleFonts.elMessiri(
-            color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
-        titleMedium: GoogleFonts.elMessiri(
-            color: Colors.white, fontSize: 25, fontWeight: FontWeight.w500),
-        titleSmall: GoogleFonts.elMessiri(
-            color: Colors.white, fontSize: 20, fontWeight: FontWeight.normal)),
+        titleLarge: GoogleFonts.poppins(
+            color: primaryDark, fontSize: 22, fontWeight: FontWeight.bold),
+        titleMedium: GoogleFonts.poppins(
+            color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+        bodyLarge: GoogleFonts.poppins(
+            color: primaryLight, fontSize: 18, fontWeight: FontWeight.bold),
+        bodyMedium: GoogleFonts.roboto(
+            color: primaryLight, fontSize: 18, fontWeight: FontWeight.w500),
+        titleSmall: GoogleFonts.roboto(
+            color: whiteColor, fontSize: 15, fontWeight: FontWeight.normal)),
   );
 }

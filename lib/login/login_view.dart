@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo_app/core/theme/my_theme.dart';
 import 'package:todo_app/core/widgets/custom_text_form_field.dart';
 import 'package:todo_app/home/home_screen.dart';
@@ -25,6 +26,7 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
+    var locale = AppLocalizations.of(context);
     var theme = Theme.of(context);
     return Container(
       decoration: BoxDecoration(
@@ -38,7 +40,7 @@ class _LoginViewState extends State<LoginView> {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             title: Text(
-              'Login',
+              locale!.login,
               style: theme.textTheme.titleLarge,
             ),
             centerTitle: true,
@@ -54,7 +56,7 @@ class _LoginViewState extends State<LoginView> {
                   children: [
                     SizedBox(height: MediaQuery.of(context).size.height * 0.18),
                     Text(
-                      'Welcome back!',
+                      locale!.welcome_back,
                       textAlign: TextAlign.start,
                       style: theme.textTheme.titleLarge!.copyWith(
                           color: Colors.black,
@@ -65,22 +67,22 @@ class _LoginViewState extends State<LoginView> {
                     CustomTextFormField(
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
-                            return 'You must enter your email';
+                            return locale!.you_must_enter_your_email;
                           }
                           var regex = RegExp(
                               r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
                           if (!regex.hasMatch(value)) {
-                            return 'Invalid Email';
+                            return locale!.invalid_email;
                           }
                           return null;
                         },
-                        labelText: 'Email',
+                        labelText: locale!.email,
                         controller: emailController),
                     SizedBox(height: 20),
                     CustomTextFormField(
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'You must enter your password';
+                          return locale!.you_must_enter_your_password;
                         }
                         return null;
                       },
@@ -100,7 +102,7 @@ class _LoginViewState extends State<LoginView> {
                                   size: 28,
                                   color: theme.primaryColor,
                                 )),
-                      labelText: 'Password',
+                      labelText: locale!.password,
                       controller: passwordController,
                       obscureText: !isVisible,
                     ),
@@ -110,7 +112,7 @@ class _LoginViewState extends State<LoginView> {
                       child: TextButton(
                         onPressed: () {},
                         child: Text(
-                          'Forget Password ?',
+                          locale!.forget_password,
                           textAlign: TextAlign.start,
                           style: theme.textTheme.bodyMedium!.copyWith(
                             color: Colors.black,
@@ -133,7 +135,7 @@ class _LoginViewState extends State<LoginView> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Login',
+                              locale!.login,
                               style: theme.textTheme.bodyLarge!
                                   .copyWith(color: Colors.white),
                             ),
@@ -154,7 +156,7 @@ class _LoginViewState extends State<LoginView> {
                           Navigator.pushNamed(context, RegisterView.routeName);
                         },
                         child: Text(
-                          'Or Create My Account !',
+                          locale!.create_account,
                           textAlign: TextAlign.start,
                           style: theme.textTheme.bodyMedium!.copyWith(
                             color: Colors.black,

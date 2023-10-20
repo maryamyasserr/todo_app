@@ -14,14 +14,14 @@ class TaskWidget extends StatelessWidget {
     var theme = Theme.of(context);
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       decoration: BoxDecoration(
         color: MyTheme.redColor,
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: Slidable(
         startActionPane: ActionPane(
-            extentRatio: 0.25,
+            extentRatio: 0.24,
             motion: const DrawerMotion(),
             children: [
               SlidableAction(
@@ -41,7 +41,7 @@ class TaskWidget extends StatelessWidget {
           width: 400,
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: theme.colorScheme.onPrimary,
             borderRadius: BorderRadius.circular(15.0),
           ),
           child: Row(
@@ -52,7 +52,7 @@ class TaskWidget extends StatelessWidget {
                 width: 8,
                 height: 80,
                 decoration: BoxDecoration(
-                    color: theme.primaryColor,
+                    color: theme.colorScheme.primary,
                     borderRadius: BorderRadius.circular(8)),
               ),
               Column(
@@ -69,11 +69,15 @@ class TaskWidget extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Icon(Icons.alarm, size: 16),
+                      Icon(
+                        Icons.alarm,
+                        size: 16,
+                        color: MyTheme.greyColor,
+                      ),
                       SizedBox(width: 5),
                       Text(
                         '10:30 AM',
-                        style: theme.textTheme.bodySmall,
+                        style: theme.textTheme.titleSmall,
                       ),
                     ],
                   ),
@@ -83,7 +87,7 @@ class TaskWidget extends StatelessWidget {
                 width: 70,
                 height: 35,
                 decoration: BoxDecoration(
-                  color: theme.primaryColor,
+                  color: theme.colorScheme.primary,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Image.asset('assets/images/check_icon.png'),

@@ -1,7 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/login/login_view.dart';
+
+import '../core/provider/app_provider.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = 'SplashScreen';
@@ -22,8 +25,9 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Widget build(BuildContext context) {
+    var appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
-      body: Image.asset('assets/images/splash_screen.png'),
+      body: Image.asset(appProvider.splashImage()),
     );
   }
 }

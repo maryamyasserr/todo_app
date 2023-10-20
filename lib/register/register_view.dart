@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../core/theme/my_theme.dart';
 import '../core/widgets/custom_text_form_field.dart';
@@ -27,6 +28,7 @@ class _RegisterViewState extends State<RegisterView> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    var locale = AppLocalizations.of(context);
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -39,7 +41,7 @@ class _RegisterViewState extends State<RegisterView> {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             title: Text(
-              'Create Account',
+              locale!.create_account,
               style: theme.textTheme.titleLarge,
             ),
             centerTitle: true,
@@ -58,37 +60,37 @@ class _RegisterViewState extends State<RegisterView> {
                     CustomTextFormField(
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
-                            return 'You must enter your full name';
+                            return locale!.you_must_enter_your_full_name;
                           }
                           return null;
                         },
-                        labelText: 'Full Name',
+                        labelText: locale!.full_name,
                         controller: fullNameController),
                     SizedBox(height: 20),
                     CustomTextFormField(
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
-                            return 'You must enter your email';
+                            return locale!.you_must_enter_your_email;
                           }
                           var regex = RegExp(
                               r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
                           if (!regex.hasMatch(value)) {
-                            return 'Invalid Email';
+                            return locale!.invalid_email;
                           }
                           return null;
                         },
-                        labelText: 'Email',
+                        labelText: locale!.email,
                         controller: emailController),
                     SizedBox(height: 20),
                     CustomTextFormField(
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'You must enter your password';
+                          return locale!.you_must_enter_your_password;
                         }
                         var regex = RegExp(
                             r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
                         if (!regex.hasMatch(value)) {
-                          return 'Enter valid password';
+                          return locale!.enter_valid_password;
                         }
                         return null;
                       },
@@ -108,7 +110,7 @@ class _RegisterViewState extends State<RegisterView> {
                                   size: 28,
                                   color: theme.primaryColor,
                                 )),
-                      labelText: 'Password',
+                      labelText: locale!.password,
                       controller: passwordController,
                       obscureText: !isVisible,
                     ),
@@ -116,10 +118,10 @@ class _RegisterViewState extends State<RegisterView> {
                     CustomTextFormField(
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'You must confirm your password';
+                          return locale!.you_must_confirm_your_password;
                         }
                         if (value != passwordController.text) {
-                          return 'Password does not match';
+                          return locale!.password_does_not_match;
                         }
                         return null;
                       },
@@ -139,7 +141,7 @@ class _RegisterViewState extends State<RegisterView> {
                                   size: 28,
                                   color: theme.primaryColor,
                                 )),
-                      labelText: 'Confirm Password',
+                      labelText: locale!.confirm_password,
                       controller: confirmPasswordController,
                       obscureText: !isVisible,
                     ),
@@ -158,7 +160,7 @@ class _RegisterViewState extends State<RegisterView> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Create Account',
+                              locale!.create_account,
                               style: theme.textTheme.bodyLarge!
                                   .copyWith(color: Colors.white),
                             ),
