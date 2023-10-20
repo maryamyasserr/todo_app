@@ -35,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Colors.white,
             size: 30,
           ),
+          backgroundColor: theme.colorScheme.primary,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

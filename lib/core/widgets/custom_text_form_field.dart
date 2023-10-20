@@ -30,7 +30,10 @@ class CustomTextFormField extends StatelessWidget {
       obscureText: obscureText,
       decoration: InputDecoration(
         suffix: suffixIcon,
-        labelStyle: theme.textTheme.bodyLarge!.copyWith(color: Colors.black),
+        labelStyle: theme.textTheme.titleMedium!
+            .copyWith(color: Colors.grey.withOpacity(1)),
+        hintStyle: theme.textTheme.titleMedium!
+            .copyWith(color: Colors.grey.withOpacity(0.8)),
         labelText: labelText,
         hintText: title,
       ),

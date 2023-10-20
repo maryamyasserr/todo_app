@@ -1,6 +1,7 @@
 import 'package:calendar_timeline/calendar_timeline.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo_app/core/network_layer/firestore_utils.dart';
 import 'package:todo_app/core/widgets/task_widget.dart';
 import 'package:todo_app/model/task_model.dart';
@@ -21,26 +22,26 @@ class HomeView extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 20),
               height: 170,
               width: double.infinity,
-              color: theme.primaryColor,
+              color: theme.colorScheme.primary,
               child: Text(
-                'To Do List',
+                AppLocalizations.of(context)!.to_do_list,
                 style: theme.textTheme.titleLarge,
               ),
             ),
             CalendarTimeline(
               initialDate: DateTime.now(),
-              firstDate: DateTime.now(),
-              lastDate: DateTime.now().add(const Duration(
+              firstDate: DateTime.now().subtract(Duration(days: 365)),
+              lastDate: DateTime.now().add(Duration(
                 days: 365,
               )),
               onDateSelected: (date) => print(date),
               leftMargin: 20,
               monthColor: Colors.black,
-              dayColor: Colors.black,
-              activeDayColor: theme.primaryColor,
+              dayColor: theme.colorScheme.onSecondary,
+              activeDayColor: theme.colorScheme.primary,
               activeBackgroundDayColor: Colors.white,
               dotsColor: theme.primaryColor,
-              selectableDayPredicate: (date) => date.day != 23,
+              selectableDayPredicate: (date) => true,
               locale: 'en_ISO',
             )
           ],
