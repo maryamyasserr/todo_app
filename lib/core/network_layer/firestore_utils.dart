@@ -33,4 +33,12 @@ class FireStoreUtils {
     var snapshot = getCollection().snapshots();
     return snapshot;
   }
+
+  static Future<void> isDone(TaskModel model) async {
+    getCollection().doc(model.id).update({"isDone": !model.isDone});
+  }
+
+  static Future<void> updateTask(TaskModel model) async {
+    getCollection().doc(model.id).update(model.toFireStore());
+  }
 }

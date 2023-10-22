@@ -1,25 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/core/network_layer/firestore_utils.dart';
 import 'package:todo_app/core/theme/my_theme.dart';
 import 'package:todo_app/model/task_model.dart';
+import 'package:todo_app/pages/edit_screen/edit_view.dart';
 
-class TaskWidget extends StatelessWidget {
+import '../../../core/provider/app_provider.dart';
+
+class TaskWidget extends StatefulWidget {
   final TaskModel taskModel;
 
   const TaskWidget({super.key, required this.taskModel});
 
   @override
+  State<TaskWidget> createState() => _TaskWidgetState();
+}
+
+class _TaskWidgetState extends State<TaskWidget> {
+  @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    var appProvider = Provider.of<AppProvider>(context);
 
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       decoration: BoxDecoration(
-        color: MyTheme.redColor,
+        color: MyTheme.whiteColor,
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: Slidable(
+        endActionPane: ActionPane(
+            extentRatio: 0.24,
+            motion: const DrawerMotion(),
+            children: [
+              SlidableAction(
+                flex: 2,
+                onPressed: (context) {
+                  Navigator.pushNamed(context, EditView.routeName,
+                      arguments: widget.taskModel);
+                },
+                borderRadius: BorderRadius.circular(15.0),
+                backgroundColor: MyTheme.greyColor,
+                foregroundColor: Colors.white,
+                icon: Icons.edit,
+                label: 'Edit',
+              ),
+            ]),
         startActionPane: ActionPane(
             extentRatio: 0.24,
             motion: const DrawerMotion(),
@@ -27,7 +54,8 @@ class TaskWidget extends StatelessWidget {
               SlidableAction(
                 flex: 2,
                 onPressed: (context) async {
-                  await FireStoreUtils.deleteDataFromFireStore(taskModel);
+                  await FireStoreUtils.deleteDataFromFireStore(
+                      widget.taskModel);
                 },
                 borderRadius: BorderRadius.circular(15.0),
                 backgroundColor: MyTheme.redColor,
@@ -52,7 +80,9 @@ class TaskWidget extends StatelessWidget {
                 width: 8,
                 height: 80,
                 decoration: BoxDecoration(
-                    color: theme.colorScheme.primary,
+                    color: widget.taskModel.isDone
+                        ? MyTheme.greenColor
+                        : theme.colorScheme.primary,
                     borderRadius: BorderRadius.circular(8)),
               ),
               Column(
@@ -60,12 +90,16 @@ class TaskWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    taskModel.title,
-                    style: theme.textTheme.bodyLarge,
+                    widget.taskModel.title,
+                    style: widget.taskModel.isDone
+                        ? TextStyle(color: MyTheme.greenColor)
+                        : theme.textTheme.bodyLarge,
                   ),
                   Text(
-                    taskModel.description,
-                    style: theme.textTheme.bodyMedium,
+                    widget.taskModel.description,
+                    style: widget.taskModel.isDone
+                        ? TextStyle(color: MyTheme.greenColor)
+                        : theme.textTheme.bodyMedium,
                   ),
                   Row(
                     children: [
@@ -83,14 +117,28 @@ class TaskWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              Container(
-                width: 70,
-                height: 35,
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.primary,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Image.asset('assets/images/check_icon.png'),
+              InkWell(
+                onTap: () {
+                  FireStoreUtils.isDone(widget.taskModel);
+                  setState(() {});
+                },
+                child: widget.taskModel.isDone!
+                    ? Text(
+                        'Done!',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: MyTheme.greenColor),
+                      )
+                    : Container(
+                        width: 70,
+                        height: 35,
+                        decoration: BoxDecoration(
+                          color: theme.colorScheme.primary,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Image.asset('assets/images/check_icon.png'),
+                      ),
               ),
             ],
           ),

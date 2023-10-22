@@ -7,6 +7,7 @@ import 'package:todo_app/core/provider/app_provider.dart';
 import 'package:todo_app/core/theme/my_theme.dart';
 import 'package:todo_app/home/home_screen.dart';
 import 'package:todo_app/login/login_view.dart';
+import 'package:todo_app/pages/edit_screen/edit_view.dart';
 import 'package:todo_app/register/register_view.dart';
 import 'package:todo_app/splash_screen/splash_screen.dart';
 
@@ -37,7 +38,8 @@ class MyApp extends StatelessWidget {
         SplashScreen.routeName: (context) => SplashScreen(),
         HomeScreen.routeName: (context) => HomeScreen(),
         LoginView.routeName: (context) => LoginView(),
-        RegisterView.routeName: (context) => RegisterView()
+        RegisterView.routeName: (context) => RegisterView(),
+        EditView.routeName: (context) => EditView()
       },
       theme: MyTheme.lightMode,
       darkTheme: MyTheme.darkMode,
